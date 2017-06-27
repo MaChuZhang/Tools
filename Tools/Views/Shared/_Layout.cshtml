@@ -5,39 +5,74 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
-    @Styles.Render("~/Content/css")
+    @*@Styles.Render("~/Content/css")*@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("应用程序名称", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
-                    <li>@Html.ActionLink("关于", "About", "Home")</li>
-                    <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
+<style type="text/css">
+    * {margin:0;padding:0;}
+    body {background-color:#f1f1f1;}
+    ul li {list-style:none}
+    a {text-decoration:none;font-size:14px;}
+    #left{position:absolute;width:200px;height:100%;background-color:#44b549;top:0;left:0}
+    #left #logo_cont{height: 60px;width: 100%;}
+    #left #logo_cont a.logo_a{color:#ffffff;display:block;text-align:center;}
+    #left #logo_cont a.logo_name {font-size:16px;height:40px;line-height:40px;}
+    #left #logo_cont a.logo_url{font-size:16px;height:20px;line-height:20px;}
+    #left #logo_cont a.logo_a:hover {outline:none;text-decoration:none;}
+
+    #menu_cont {margin-top:20px;}
+    #ul_menu li>a{color:#ffffff}
+    #ul_menu li>a{display:block;text-align:center;padding:8px 0px;border-right:5px solid #44b549}
+    #ul_menu li > a:hover {color:#f1f1f1;border-right: 5px solid#ffffff;}
+    .active_sub {border-right:5px solid #ffffff !important;color:#f1f1f1 !important}
+   
+
+    #right {position:absolute;top:0;left:200px;width:100%}
+    #nav{height:60px;background-color:#ffffff;width:100%;box-shadow:5px 0px 5px #888888}
+    #nav .nav-ul ul li{float:left;}
+    #nav .nav-ul ul li > a{color:#333;display:inline-block;line-height:60px;padding:0px 15px;}
+    #nav .nav-ul ul li > a:hover {color:#44b549}
+
+    #main-content .content-box { padding:30px;}
+</style>
+    <div id="left">
+       <div id="logo_cont">
+             <a href="#" class="logo_a logo_name">MYTools</a>
+             <a href="#" class="logo_a logo_url">www.xiandanke.cn</a>
+       </div>
+       <div id="menu_cont">
+           <div  class="menu_items">
+             <ul id="ul_menu">
+                 <li><a href="/Home/JiSuanQi" class="active_sub">计算器</a></li>
+                 <li><a href="/Home/NianHuaLv">年率化率</a></li>
+             </ul>
+           </div>
+       </div>
+    </div>
+    <div id="right">
+        <div id="nav">
+            <div class="nav-ul">
+                <ul>
+                    <li><a href="#">计算</a></li>
+                    <li><a href="#">加密</a></li>
+                    <li><a href="#">装逼</a></li>
+                    <li><a href="#">调色</a></li>
+                    <li><a href="#">Json转换</a></li>
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+        <div id="main-content">
+            <div class="content-box">
+                @RenderBody(); 
+            </div>
+        </div>
+    </div>
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+

@@ -19,7 +19,14 @@ namespace Tools.Controllers
 
             return View();
         }
-
+        public ActionResult JiSuanQi()
+        {
+            return View();
+        }
+        public ActionResult NianHuaLv()
+        {
+            return View();
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

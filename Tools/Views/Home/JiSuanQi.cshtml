@@ -1,0 +1,155 @@
+﻿
+@{
+    ViewBag.Title = "计算器";
+}
+<style type="text/css">
+    #jisuanqi {
+        background-color: #ffffff;
+        display: inline-block;
+        padding: 20px;
+        box-shadow: 1px 1px 3px 3px #dedede;
+        width: 285px;
+        overflow: hidden;
+    }
+
+        #jisuanqi .jsq_btn span {
+            position: relative;
+            top: 0;
+            transition: all 0.4s ease;
+            border-radius: 3px;
+            text-align: center;
+            background-color: #f1f1f1;
+            width: 60px;
+            padding: 8px 0px;
+            display: inline-block;
+            cursor: pointer;
+            box-shadow: 0px 4px #808080;
+            margin-right: 10px;
+            margin-left: 0px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+    span.span_last {
+        margin-right: 0 !important;
+    }
+
+    #jisuanqi .jsq_btn span:hover {
+        background-color: #d1d1d1;
+    }
+
+    #jisuanqi .jsq_btn span:active {
+        box-shadow: 0px 0px #dedede;
+        top: 4px;
+    }
+
+    #jisuanqi .jsq_show {
+        margin-bottom: 10px;
+    }
+
+        #jisuanqi .jsq_show #screen {
+            height: 50px;
+            padding: 0 10px;
+            background-color: #dedede;
+            border-radius: 3px;
+            text-align: right;
+            letter-spacing: 1px;
+            font-size: 18px;
+            line-height: 50px;
+            box-shadow: inset 0px 4px rgba(0, 0, 0, 0.2);
+        }
+</style>
+<div id="jisuanqi">
+    <div class="jsq_show">
+        <div id="screen"></div>
+    </div>
+    <div class="jsq_btn">
+        <span>开机</span>
+        <span>关机</span>
+        <span>清屏</span>
+        <span class="span_last">+</span>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span class="span_last">-</span>
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+        <span class="span_last">*</span>
+        <span>7</span>
+        <span>8</span>
+        <span>9</span>
+        <span class="span_last">/</span>
+        <span>0</span>
+        <span>.</span>
+        <span>%</span>
+        <span class="span_last">=</span>
+    </div>
+</div>
+
+<script type="text/javascript">
+                        var keys = document.querySelectorAll(".jsq_btn span");
+                        var operatores = ['-', '+', '*', '/'];
+                        var _decimal = false;
+                        var isStart = false;
+                        for (var i = 0; i < keys.length; i++)
+                        {
+                            keys[i].onclick = function (e)
+                            {
+                                var input = document.getElementById("screen");
+                                var inputVal = input.innerHTML;
+                                var btnVal = this.innerText;
+                                if (!isStart && btnVal != "开机")
+                                    return;
+                                switch(btnVal)
+                                {
+                                    case '开机':
+                                        {
+                                            input.innerHTML = '0';
+                                            isStart = true;
+                                        }
+                                        break;
+                                    case '关机':
+                                        {
+                                            input.innerHTML = '';
+                                            isStart = false;
+                                        }
+                                        break;
+                                    case '清屏':
+                                        input.innerHTML = '0';
+                                        break;
+                                    case '=':
+                                        {
+                                            debugger;
+                                            var lastChar = inputVal[inputVal.length - 1];
+                                            if (operatores.indexOf(lastChar) > -1 || lastChar == '.')
+                                                inputVal = inputVal.replace('.$', '');
+                                            if (inputVal[0] == '0')
+                                                inputVal = inputVal.replace('0', '');
+                                            if (inputVal)
+                                                input.innerHTML = eval(inputVal);
+                                            _decimal = false;
+                                        }
+                                        break;
+                                    case '.':
+                                        {
+                                            if (!_decimal)
+                                            {
+                                                input.innerHTML += btnVal;
+                                                _decimal = true;
+                                            }
+                                        }
+                                        break;
+                                    default:
+                                        {
+                                            debugger
+                                            if (inputVal == '0')
+                                                input.innerHTML = '';
+                                            input.innerHTML += btnVal;
+                                        }
+                                        break;
+                                }
+                            }
+                        }
+</script>
+
